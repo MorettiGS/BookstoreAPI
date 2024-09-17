@@ -28,6 +28,9 @@ $config = [
         'client' => [
             'class' => 'app\models\Client',
         ],
+        'book' => [
+            'class' => 'app\models\Book',
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -48,11 +51,13 @@ $config = [
             'rules' => [
                 'client/create' => 'client/create',
                 'client/list' => 'client/list',
+                'book/create' => 'book/create',
+                'book/list' => 'book/list',
             ],
         ],
         'response' => [
             'class' => 'yii\web\Response',
-            'format' => yii\web\Response::FORMAT_JSON, // Default response format
+            'format' => yii\web\Response::FORMAT_JSON,
         ],
     ],
     'params' => $params,

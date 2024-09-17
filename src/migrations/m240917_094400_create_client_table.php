@@ -14,7 +14,7 @@ class m240917_094400_create_client_table extends Migration
     {
         $this->createTable('{{%client}}', [
             'id' => $this->primaryKey(),
-            'cpf' => $this->string(14)->notNull()->unique(), // Adjusted for CPF format XXX.XXX.XXX-XX
+            'cpf' => $this->string(14)->notNull()->unique(),
             'gender' => $this->string(1)->notNull(), // Use 'M' or 'F' as per model rules
             'name' => $this->string(50)->notNull(),
             'cep' => $this->string(9)->notNull(),

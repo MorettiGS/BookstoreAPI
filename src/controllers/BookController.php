@@ -4,13 +4,13 @@ namespace app\controllers;
 
 use Yii;
 use yii\rest\Controller;
-use app\models\Client;
+use app\models\Book;
 use yii\data\ActiveDataProvider;
 use yii\web\Response;
 use yii\web\UnauthorizedHttpException;
 use yii\web\BadRequestHttpException;
 
-class ClientController extends Controller
+class BookController extends Controller
 {
     public function behaviors()
     {
@@ -23,7 +23,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Lists all clients with pagination, sorting, and filtering.
+     * Lists all books with pagination, sorting, and filtering.
      * @param int $limit Number of records to return.
      * @param int $offset Number of records to skip.
      * @param string|null $orderBy Field to order by.
@@ -33,13 +33,13 @@ class ClientController extends Controller
      */
     public function actionList($limit = 10, $offset = 0, $orderBy = null, $filter = null, $term = null)
     {
-        // Define a query to fetch clients
-        $query = Client::find();
+        // Define a query to fetch books
+        $query = Book::find();
         
         // Handle filtering if $filter and $term are provided
         if ($filter && $term) {
             // Add safety check to ensure valid fields for filtering
-            $allowedFields = ['name', 'cpf']; // Lista de campos permitidos
+            $allowedFields = ['isbn', 'title', 'author']; // Lista de campos permitidos
             if (in_array($filter, $allowedFields)) {
                 $query->andWhere(['like', $filter, $term]);
             } else {
@@ -49,7 +49,7 @@ class ClientController extends Controller
 
         // Handle ordering if $orderBy is provided
         if ($orderBy) {
-            $allowedFields = ['name', 'cpf', 'city']; // Lista de campos permitidos para ordenação
+            $allowedFields = ['title', 'price']; // Lista de campos permitidos para ordenação
             if (in_array($orderBy, $allowedFields)) {
                 $query->orderBy([$orderBy => SORT_ASC]); // Ordenação crescente por padrão
             } else {
@@ -74,25 +74,25 @@ class ClientController extends Controller
     }
 
     /**
-     * Creates a new client.
-     * @return Client
+     * Creates a new book.
+     * @return Book
      */
     public function actionCreate()
     {
-        $model = new Client();
+        $model = new Book();
         $request = Yii::$app->request->bodyParams;
 
         if ($model->load($request, '') && $model->validate() && $model->save()) {
             return [
                 'status' => Yii::$app->response->statusCode,
-                'message' => 'Client created successfully',
+                'message' => 'Book created successfully',
                 'data' => $model,
             ];
         }
 
         return [
             'status' => Yii::$app->response->statusCode,
-            'message' => 'Failed to create client',
+            'message' => 'Failed to create book',
             'errors' => $model->errors,
         ];
     }
