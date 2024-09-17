@@ -17,7 +17,11 @@
         "php": ">=7.4.0",
         "yiisoft/yii2": "~2.0.45",
         "yiisoft/yii2-bootstrap5": "~2.0.2",
-        "yiisoft/yii2-symfonymailer": "~2.0.3"
+        "yiisoft/yii2-symfonymailer": "~2.0.3",
+        "firebase/php-jwt": "^6.10",
+        "vlucas/phpdotenv": "^5.6",
+        "yiithings/yii2-dotenv": "*",
+        "yiisoft/yii2-httpclient": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
