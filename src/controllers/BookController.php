@@ -9,17 +9,45 @@ use yii\data\ActiveDataProvider;
 use yii\web\Response;
 use yii\web\UnauthorizedHttpException;
 use yii\web\BadRequestHttpException;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 class BookController extends Controller
 {
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        
+
         // Ensure the responses are JSON
         $behaviors['contentNegotiator']['formats']['application/json'] = Response::FORMAT_JSON;
 
         return $behaviors;
+    }
+
+    protected function verifyJwt($token)
+    {
+        try {
+            $decoded = JWT::decode($token, new Key(Yii::$app->params['jwtSecretKey'], 'HS256'));
+            return true;
+        } catch (\Exception $e) {
+            throw new UnauthorizedHttpException('Invalid or expired token.');
+        }
+    }
+
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+            $authHeader = Yii::$app->request->getHeaders()->get('Authorization');
+            if (!$authHeader || !preg_match('/^Bearer\s+(.*?)$/', $authHeader, $matches)) {
+                throw new UnauthorizedHttpException('No token provided.');
+            }
+
+            $token = $matches[1];
+            $this->verifyJwt($token);
+
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -49,6 +49,7 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
+                'user/login' => 'user/login',
                 'client/create' => 'client/create',
                 'client/list' => 'client/list',
                 'book/create' => 'book/create',
