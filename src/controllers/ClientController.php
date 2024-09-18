@@ -27,7 +27,7 @@ class ClientController extends Controller
     protected function verifyJwt($token)
     {
         try {
-            $decoded = JWT::decode($token, new Key(Yii::$app->params['jwtSecretKey'], 'HS256'));
+            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET_KEY'], 'HS256'));
             return true;
         } catch (\Exception $e) {
             throw new UnauthorizedHttpException('Invalid or expired token.');

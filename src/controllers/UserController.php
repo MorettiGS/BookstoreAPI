@@ -47,7 +47,7 @@ class UserController extends Controller
 
     protected function generateJwt($user)
     {
-        $key = Yii::$app->params['jwtSecretKey'];
+        $key = $_ENV['JWT_SECRET_KEY'];
 
         $payload = [
             'iss' => 'localhost', // Issuer of the token

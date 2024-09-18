@@ -33,4 +33,4 @@ tests/_support/_generated
 /.vagrant
 
 #environment variables
-/src/.env
+/.env

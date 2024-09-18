@@ -1,6 +1,5 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
@@ -61,7 +60,6 @@ $config = [
             'format' => yii\web\Response::FORMAT_JSON,
         ],
     ],
-    'params' => $params,
 ];
 
 return $config;
