@@ -1,5 +1,8 @@
 <?php
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
+$dotenv->load();
+
 return [
     'class' => 'yii\db\Connection',
     'dsn' => $_ENV['DB_DSN'],

@@ -14,7 +14,7 @@ class UserController extends Controller
         $db = Yii::$app->db;
         
         // Check if the login already exists
-        $existingUser = User::findOne(['login' => $login])->exists();
+        $existingUser = User::findOne(['login' => $login]);
 
         if ($existingUser) {
             echo "Erro: O login '$login' já existe.\n";
