@@ -7,5 +7,6 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
 $dotenv->load();
 
 $config = require __DIR__ . '/../config/web.php';
+$config = require __DIR__ . '/../config/console.php';
 
 (new yii\web\Application($config))->run();
